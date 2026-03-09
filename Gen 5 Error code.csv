@@ -1,0 +1,59 @@
+Error Code,Alarm Description,Alarm Details
+SU01,Low Steam Supply,Steam supply is below minimum pressure. Triggers an automatic cycle abort if detected during active phases (disabled in Standby per SB 166).
+SU02,Low Air Supply,Compressed air supply is below minimum pressure. Triggers an automatic cycle abort during active phases.
+SU03,Low Water Supply,Water flow is below the minimum required value for the condenser or vacuum pump.
+SU11,High Steam Supply,External steam supply exceeds the maximum safety setpoint.
+SU12,High Air Supply,External compressed air supply exceeds the maximum safety setpoint.
+SU13,High Water Supply,External water flow rate exceeds the maximum safety setpoint.
+PW01,Power Interruption,A power loss was detected during an active cycle. Logic maintains Door Cover state (In/Out) upon power restoration.
+,,
+Error Code,Alarm Description,Alarm Details
+AF01,AutoStart Heating Timeout,Generator failed to heat within the allotted time for AutoStart.
+AF11 / AF21,AutoStart Failed,AutoStart failed because Door 1 or Door 2 was left open.
+GE01,Generator Over Pressure,Generator pressure exceeded the maximum allowance.
+GE02,Generator Over Temp,Generator temperature exceeded the maximum safety limit.
+GE03,Generator Low Water,Steam generator detected a dangerously low water level.
+GE05,Generator Heating Fault,Generator took too long to reach operating pressure.
+GE55,Generator Level Sensor,Level probe is disconnected or reading out of range.
+GE99,Press/Temp Alignment,Generator pressure and temperature readings do not match.
+CS01,Clean Steam Fill,Clean steam pre-heat tank took too long to fill.
+CS02,Clean Steam Heating,Pre-heat tank took too long to reach operating temperature.
+CS03,Clean Steam Pressure,Clean steam generator failed to reach pressure.
+,,
+DR11 / DR21,Operation Timeout,Door 1 or Door 2 took too long to fully open or close.
+DR12 / DR22,Encroachment Error,Light curtain beam was broken by an object during door movement.
+DR13 / DR23,Door Setup Error,Incorrect gearbox or drive ratio settings detected in software.
+DR14 / DR24,High Torque,Motor detected a rapid change in torque required for movement.
+DR15 / DR25,Obstruction Error,Door movement stopped due to a physical obstruction.
+DR16 / DR26,Cover Retract Fault,The decorative door cover failed to retract.
+DR17 / DR27,Panel Open,The external service panel is open or the microswitch is not engaged.
+DR19 / DR29,Cover Inflate Fault,The decorative door cover failed to inflate/expand.
+,,
+GK01,Low Gasket Pressure,Gasket has not inflated to the minimum required air pressure.
+GK02,Excessive Gasket Pressure,Gasket pressure has exceeded the maximum safety limit.
+PE01,Vacuum Pulse Timeout,The vacuum pulse failed to reach the target level in time.
+PE02,Pressure Pulse Timeout,The pressure pulse failed to reach the target level in time.
+PE05,Excessive Pulses,The cycle exceeded the pulse limit (40) without reaching target temp.
+ST01,Steam Charge Warning,The stage is nearing a timeout fault before reaching sterilize temp.
+ST02,Steam Charge Timeout,The stage took too long to reach the sterilizing temperature.
+ST03,Low Sterilize Temp,Chamber temperature fell below the minimum during the sterilize stage.
+ST04,Over Temperature,Chamber temperature exceeded the maximum limit during sterilization.
+ST05,Sterilize - Residual Air,Difference between Air Detector and Drain probes is >2°C.
+AD01,Air Detector Sterilize,The Air Detector Test failed to detect air when it was expected.
+OK01,Air Detected,Air detected during an Air Detector type cycle (Expected Result).
+AE01,Excessive Air Fault,Excessive air detected during the Air Admission Stage.
+AE02,Air Detect Calibration,Air Detector reached temperature during a SMART cycle; needs calibration.
+VT03,Exhaust Vacuum Timeout,The exhaust stage took too long to reach the vacuum setpoint.
+VT04,Drying Vacuum Timeout,The drying stage took too long to achieve the required vacuum level.
+UA01,User Abort,The cycle was manually stopped by an operator.
+SB01,Stabilize Fault,Pressure change >10.8 kPa during the 5-minute stabilize stage.
+LR01,Excessive Leak,Pressure change >1.3 kPa during a 10-minute leak rate test.
+,,
+,,
+SU01,Low Steam Supply,Steam pressure is below the minimum operational requirement.
+SU02,Low Air Supply,Compressed air supply is below the minimum required pressure.
+SU03,Low Water Supply,Water flow rate is below the minimum required value.
+SU11,High Steam Supply,Steam Supply pressure has exceeded the maximum limit.
+SU12,High Air Supply,Air Supply pressure has exceeded the maximum limit.
+SU13,High Water Supply,Water flow rate has exceeded the maximum limit.
+PW01,Power Interrupt,A power interruption was detected during an active cycle.

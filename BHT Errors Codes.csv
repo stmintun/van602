@@ -1,0 +1,67 @@
+Code,Model(s),Display / Message,Possible Cause,Troubleshooting / Remedy
+1–2,All,ERROR 1 / 2,Not Applicable (N.A.),N.A.
+3,M3,PT100 INADM.DEVI,Temp. deviation between two sensors > limit,"Restart; if repeat, replace PT100 sensor."
+4,M3,HIGH DISINF.TEMP,Chamber temp. > allowed limit during disinfection,Restart and call service if repeated.
+4,M5,Def.DIFF.PT Desinf,Temp. difference between sensors > 3°C,"Check chamber, boiler, and dryer PT100."
+5,M3,LOW DISINF.TEMP,Chamber temp. < allowed limit during disinfection,Restart and call service if repeated.
+5,M5,Jet Error,Washer spray arms are not turning,"Check for blockages, spray arm bush, and cap."
+6,M3,ERROR CONDUCTIV.,RO-water conductivity > set point value,Ensure DI-water quality; check sensor.
+6,M5,High Disinf.Temp,Temp. reached 98°C during holding time,Check chamber PT100 and heating contactor.
+7,M3,WRONG VALVE,Non-existing valve used in program,Call service engineer.
+7,M5,Low Disinf.Temp,Disinf. temp. not reached set value (>70°C),Check chamber PT100 and heating contactors.
+8,M3,TANKTEMP. > 95 C,Wash chamber temp. exceeded safety limit,Restart machine; check heating components.
+8,M5,Conductivity fault,Rinse water conductivity outside tolerance,Check main water supply and sensor.
+8-11,M4/M5ISO,Def CS Door End (op/cl/up/do),Door end switches (Clean Side) not recognized,Check/adjust door end switch or mechanics.
+9,M3/M5,STOP-BUTTON / STOP-KEY,"User activated ""Stop"" key (interruption)",Restart the program.
+10,M3/M5,WRONG RACK,Incorrect rack/insert basket used for program,Use proper rack and restart program.
+11,M3/M5,NO PROG-END,"Last program step not set to ""Program end""",Verify program steps (must end with type 29).
+12,M3/M5,PROG.-START ERR,"First program step not set to ""Preparation""",Verify program steps (must start with type 28).
+12,M5 ISO,Level-error,Final-level reached before basic-level,Reset unit and restart program.
+12-15,M4/M5ISO,Def. Door CS (op/cl/up/do),Clean Side door activity timed out,Check door mechanics for jammed objects.
+13,M3/M5,TEMP < DOSERTEMP,Step holding temp. is lower than dosing temp.,Verify program step temperature settings.
+14,M3/M5,DRYER TEMP ERR,Dryer failed to reach target temp. within timeout,"Check heating elements, contactor, and dryer."
+15,M3/M5,WRONG DOS-NR.,Non-existing dosing unit number selected,Verify program dosing step parameters.
+16,M3,ERR. BOIL. COOL,Program accessing boiler water without preparation,Verify program steps.
+16,M5 ISO,Filling < MIN,Required water volume reached too soon,Check level/pressure sensors and water valve.
+16,M5 ISO,Dosing Security!,Maximum dosing time exceeded,Check dosing pump/sensor; recalibrate system.
+16,M4/M5ISO,Safety door CS,Safety panel of Clean Side door was pressed,Remove obstructing object.
+17,M3,ERR. BOIL. CONTACT,Boiler contactor monitoring reacted,Test and exchange contactor if necessary.
+17,M5 ISO,Filling > MAX,Maximum water volume exceeded,Check level/pressure sensors and water valve.
+18,M3/M5,BOIL. OVERLEVEL,Too much water in boiler; valve or switch defect,Activate drain valves; check level sensors.
+18-21,M4/M5ISO,Def USDoorEnd (op/cl/up/do),Door end switches (Unclean Side) not recognized,Check/adjust door end switches.
+19,M5 ISO,Lack of water,Requested water volume not reached (timeout),"Check water supply, valves, and drain leaks."
+20,M3/M5,ERR.PUMP-PRESS.,Wash pressure control detected low pressure,"Check pump, pressure sensor, and foaming."
+22-25,M4/M5ISO,Def. Door US (op/cl/up/do),Unclean Side door activity timed out,Check door mechanics for jammed objects.
+21,M3/M5,ERR. REM. FILLING,Rest-filling after pump start failed,Check water availability and filling system.
+22,M3,ERR. DRAINAGE,Chamber not emptied within time limit,Check drain pump and level sensors.
+23,M3/M5,ERR. FOAMING,Wash pressure lost due to foaming or insertion,Check endoscope insertion and foaming.
+24,M3/M5,TANK OVERLEVEL,Too much water in wash chamber,Check inlet valve and level system.
+25,M3/M5,DOOR OPEN,Door detected open during wash cycle,Check door micro switch and mechanics.
+25,M5 ISO,Emergency stop Error,Conveyor emergency stop activated,Check emergency switch and safety hood.
+26-27,M5 ISO,Safety bar (CS/UCS),Safety bar activated by object or operator,Check for obstructions or safety bar defect.
+28–35,M4/M5ISO,Break/Def DPR (R/L),Inadmissible value or pressure drop in test sensors,Check sensor connections; run Pressure Test (P15).
+36,All,Break Tank PT100,Inadmissible value / interruption at tank sensor,Check sensor and connections.
+38,M5 ISO,Door CS open!,Clean Side door detected open during program,Check door open sensor.
+39,M5 ISO,Door UCS open!,Unclean Side door detected open during program,Check door open sensor.
+40,All,DOS 1 EMPTY,Cleaner container empty or sensor defect,Refill container.
+41,All,DOS 1 START,Dosing unit not working after activation,Run P16 (Rinsing dosage system).
+42–58,M5 ISO,Def. Dos (1-4) (Start/MAX/Min),"Dosing unit tolerance, flow, or activation errors","Check impulse sensors, pumps, and valves; run P16."
+54,M4/M5ISO,Def. drain,Chamber not emptied within time limit,Check drain pump and level recognition.
+59,All,CALIBR. DOS.,Dosage system calibration lost or missing,Perform new calibration.
+60,All,ERR. TANKHEAT,Chamber failed to reach target temperature,"Check heating elements, contactors, and sensors."
+61,M4/M5ISO,Motor prot. UWP,Circulation pump motor overcharged or phase failed,Reset motor protection switch; check for shorts.
+62,M4/M5ISO,STL 60 reaction,Temperature exceeded 60°C (Endoscope programs),Check wash program parameters.
+63,All,Maintenance date,Service counter reached pre-set number of cycles,Carry out maintenance and reset counter.
+64,M5 ISO,Boiler leak,Signal loss from boiler normal level float switch,Check float switch and boiler drain valve.
+65,M5 ISO,Boiler inlet defect!,Boiler failed to fill within time limit,Check inlet valve and float switch.
+66,M5 ISO,Boiler heating defect!,Boiler failed to reach set temperature,Check heating elements and thermostat.
+67,M5 ISO,Break boiler PT100!,Interruption at boiler temperature sensor,Check/exchange PT100 sensor.
+68,M5 ISO,Short circuit boiler PT100,Short circuit at boiler temperature sensor,Check/exchange PT100 sensor.
+72,M5 ISO,Motor protection pump,Recirculation pump motor overcharged,"Check connections, balance, and drain valve."
+74,All,CHANGE STERILFILT,Maintenance interval for filter reached,Replace sterile filter.
+84,M5 ISO,Interbus error,Communication failure in interbus system,Check connections on PLC and touchscreen.
+85,M5 ISO,Error in peripherals,Fault in connected devices or Fuse F135,Check fuse and search for short circuits.
+90,All,ERR. SCANNER,Communication failure with scanner unit,Restart machine; check scanner connections.
+91,All,ERR. PRINTER,Communication failure with printer unit,Check power supply and printer cable.
+92,All,ERR. PC / Error EDP,Communication failure with external IT system,Check machine-to-site IT connections.
+101,M3/M5,SERVICE-DATE,Batch counter reached maintenance limit,Complete service maintenance and reset counter

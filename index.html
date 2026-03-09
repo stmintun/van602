@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Min's Van 602 - Pro</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+    <style>
+        :root { --primary: #2563eb; --bg: #f8fafc; --dark: #0f172a; --danger: #ef4444; --success: #22c55e; --accent: #f59e0b; --purple: #8b5cf6; }
+        body { font-family: -apple-system, system-ui, sans-serif; background: var(--bg); margin: 0; padding: 0; color: var(--dark); overflow-x: hidden; }
+        
+        header { background: var(--dark); color: white; padding: 30px 20px 60px 20px; text-align: center; }
+        .logo { font-size: 1.4rem; font-weight: 800; letter-spacing: 1px; margin-bottom: 20px; }
+        
+        .main-search-container { padding: 0 20px; max-width: 600px; margin: -35px auto 20px auto; position: relative; z-index: 5; }
+        .main-search-input { 
+            width: 100%; padding: 18px; border-radius: 15px; border: none; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1); font-size: 1.1rem; outline: none;
+            box-sizing: border-box;
+        }
+
+        .dashboard { display: grid; grid-template-columns: 1fr; gap: 12px; padding: 0 20px 20px 20px; max-width: 600px; margin: 0 auto; }
+        .menu-item { display: flex; align-items: center; justify-content: space-between; padding: 18px; border-radius: 12px; color: white; font-weight: bold; border: none; cursor: pointer; text-decoration: none; font-size: 1rem; }
+        
+        .bg-blue { background: var(--primary); }
+        .bg-green { background: var(--success); }
+        .bg-red { background: var(--danger); }
+        .bg-orange { background: var(--accent); }
+        .bg-purple { background: var(--purple); }
+        .bg-dark { background: #475569; }
+
+        .view-layer { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg); z-index: 100; overflow-y: auto; }
+        .view-header { position: sticky; top: 0; background: white; padding: 15px; border-bottom: 1px solid #e2e8f0; display: flex; align-items: center; gap: 15px; z-index: 110; }
+        .back-btn { background: var(--dark); color: white; border: none; padding: 10px 18px; border-radius: 8px; font-weight: bold; cursor: pointer; }
+
+        .result-card { background: white; margin: 10px 15px; border-radius: 12px; border: 1px solid #e2e8f0; padding: 15px; position: relative; }
+        .section-tag { font-size: 0.65rem; font-weight: 900; padding: 2px 6px; border-radius: 4px; text-transform: uppercase; margin-bottom: 5px; display: inline-block; }
+        .tag-part { background: #dbeafe; color: #1e40af; }
+        .tag-error { background: #fee2e2; color: #991b1b; }
+        .part-num-link { color: var(--primary); font-weight: 800; font-size: 1.1rem; text-decoration: underline; cursor: pointer; display: block; }
+        
+        .details-box { display: none; background: #f1f5f9; padding: 12px; border-radius: 8px; margin-top: 10px; font-size: 0.8rem; }
+        .detail-row { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid #e2e8f0; }
+        
+        .reorder-action-btn { 
+            background: #fff; border: 1px solid var(--danger); color: var(--danger); 
+            padding: 8px; border-radius: 6px; font-size: 0.75rem; font-weight: bold; 
+            margin-top: 10px; cursor: pointer; width: 100%; display: block; text-align: center;
+        }
+
+        #reorderOverlay {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7); z-index: 200; align-items: center; justify-content: center;
+        }
+        .reorder-modal { background: white; padding: 20px; border-radius: 15px; width: 85%; max-width: 400px; }
+        .modal-input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
+    </style>
+</head>
+<body>
+
+<header><div class="logo">MIN'S VAN - 602</div></header>
+
+<div class="main-search-container">
+    <input type="text" id="mainSearch" class="main-search-input" placeholder="🔍 Search Part # or Error Code..." onkeyup="if(event.key === 'Enter') handleGlobalSearch()">
+</div>
+
+<div class="dashboard">
+    <button class="menu-item bg-blue" onclick="openMode('all')">📋 All Inventory <span>❯</span></button>
+    <button class="menu-item bg-green" onclick="openMode('in')">✅ In Stock <span>❯</span></button>
+    <button class="menu-item bg-red" onclick="openMode('out')">❌ Out of Stock <span>❯</span></button>
+    <button class="menu-item bg-orange" onclick="openMode('bht')">⚠️ BHT Errors <span>❯</span></button>
+    <button class="menu-item bg-purple" onclick="openMode('gen5')">⚡ Gen 5 Errors <span>❯</span></button>
+    <a href="BHT INNOVA Spare Parts.pdf" target="_blank" class="menu-item bg-dark">📚 BHT Parts Manual <span>❯</span></a>
+</div>
+
+<div id="reorderOverlay">
+    <div class="reorder-modal">
+        <h3 style="margin-top:0;">Reorder Part</h3>
+        <p id="modalPartInfo" style="font-size: 0.9rem; color: #64748b;"></p>
+        <label style="font-size: 0.75rem; font-weight: bold;">Work Order / Job #</label>
+        <input type="text" id="modalWO" class="modal-input" placeholder="Job Number">
+        <label style="font-size: 0.75rem; font-weight: bold;">Quantity Needed</label>
+        <input type="number" id="modalQty" class="modal-input" placeholder="Quantity" value="1">
+        <button class="bg-green" style="width:100%; border:none; color:white; padding:15px; border-radius:8px; font-weight:bold; cursor:pointer;" onclick="sendQuickEmail()">📧 Send Reorder Email</button>
+        <button style="width:100%; border:none; background:none; padding:10px; color:#64748b; cursor:pointer;" onclick="closeModal()">Cancel</button>
+    </div>
+</div>
+
+<div id="resultsView" class="view-layer">
+    <div class="view-header">
+        <button class="back-btn" onclick="closeView()">← BACK</button>
+        <h2 id="viewTitle" style="margin:0; font-size:1.1rem;">Results</h2>
+    </div>
+    <div id="unifiedResults"></div>
+</div>
+
+<script>
+    let inventory = [];
+    let bhtErrors = [];
+    let gen5Errors = [];
+    let selectedPart = {};
+
+    Papa.parse("parts.csv", { download: true, header: true, skipEmptyLines: true, complete: function(r) { inventory = r.data; }});
+    Papa.parse("BHT Errors Codes.csv", { download: true, header: true, skipEmptyLines: true, complete: function(r) {
+        bhtErrors = r.data.map(row => ({ c: row['Code'], t: row['Display / Message'], type: 'BHT', details: row }));
+    }});
+    Papa.parse("Gen 5 Error code.csv", { download: true, header: true, skipEmptyLines: true, complete: function(r) {
+        gen5Errors = r.data.filter(row => row['Error Code'] && row['Error Code'] !== 'Error Code')
+                    .map(row => ({ c: row['Error Code'], t: row['Alarm Description'], type: 'Gen 5', details: row }));
+    }});
+
+    function openMode(mode) {
+        document.getElementById('resultsView').style.display = 'block';
+        renderMaster(mode, "");
+    }
+
+    function handleGlobalSearch() {
+        const val = document.getElementById('mainSearch').value;
+        if (!val) return;
+        document.getElementById('resultsView').style.display = 'block';
+        renderMaster('search', val.toLowerCase());
+    }
+
+    function renderMaster(mode, query) {
+        const container = document.getElementById('unifiedResults');
+        container.innerHTML = "";
+        
+        // Render Errors
+        if (['bht', 'gen5', 'search'].includes(mode)) {
+            let errors = [...(mode==='bht' || mode==='search' ? bhtErrors : []), ...(mode==='gen5' || mode==='search' ? gen5Errors : [])];
+            errors.filter(e => !query || e.c.toLowerCase().includes(query) || e.t.toLowerCase().includes(query)).forEach((e, i) => {
+                let rows = ""; for(let [k,v] of Object.entries(e.details)) { if(v && k!=='Code' && k!=='Error Code') rows += `<div class="detail-row"><b>${k}:</b> <span>${v}</span></div>`; }
+                container.innerHTML += `<div class="result-card"><span class="section-tag tag-error">${e.type}</span><div class="part-num-link" onclick="toggleDet('err-${i}')">[${e.c}] ${e.t}</div><div id="err-${i}" class="details-box">${rows}</div></div>`;
+            });
+        }
+
+        // Render Parts
+        if (['all', 'in', 'out', 'search'].includes(mode)) {
+            const stockKey = Object.keys(inventory[0] || {}).find(k => k.toLowerCase().includes('stock')) || 'Stock';
+            let filtered = inventory;
+            if (mode === 'in') filtered = inventory.filter(p => parseInt(p[stockKey]) > 0);
+            if (mode === 'out') filtered = inventory.filter(p => !p[stockKey] || parseInt(p[stockKey]) <= 0);
+
+            filtered.filter(p => !query || Object.values(p).some(v => String(v).toLowerCase().includes(query))).forEach((p, i) => {
+                const keys = Object.keys(p);
+                const partNum = p[keys[0]];
+                const partDesc = p[keys[1]];
+                const stockVal = parseInt(p[stockKey]) || 0;
+
+                let rows = ""; for(let [k,v] of Object.entries(p)) { if(v) rows += `<div class="detail-row"><b>${k}:</b> <span>${v}</span></div>`; }
+                
+                // Only show reorder button if stock is 0 or less
+                let reorderBtn = stockVal <= 0 ? `<button class="reorder-action-btn" onclick="openReorder('${partNum}', '${partDesc}')">📧 Reorder This Part</button>` : '';
+
+                container.innerHTML += `
+                    <div class="result-card">
+                        <span class="section-tag tag-part">PART</span>
+                        <div class="part-num-link" onclick="toggleDet('part-${i}')">${partNum}</div>
+                        <div style="font-size:0.8rem; color:#64748b;">${partDesc}</div>
+                        ${reorderBtn}
+                        <div id="part-${i}" class="details-box">${rows}</div>
+                    </div>`;
+            });
+        }
+    }
+
+    function openReorder(num, desc) {
+        selectedPart = { num, desc };
+        document.getElementById('modalPartInfo').innerText = `${num} - ${desc}`;
+        document.getElementById('reorderOverlay').style.display = 'flex';
+    }
+
+    function closeModal() { document.getElementById('reorderOverlay').style.display = 'none'; }
+
+    function sendQuickEmail() {
+        const wo = document.getElementById('modalWO').value || "N/A";
+        const qty = document.getElementById('modalQty').value || "1";
+        const subject = `Reorder Request - Van 602 (Job: ${wo})`;
+        const body = `Work Order / Job #: ${wo}\n\nPlease order the following part:\n\nPart #: ${selectedPart.num}\nDescription: ${selectedPart.desc}\nQuantity: ${qty}\n\nThank you!`;
+        window.location.href = `mailto:parts-department@example.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        closeModal();
+    }
+
+    function toggleDet(id) { const el = document.getElementById(id); el.style.display = el.style.display === 'block' ? 'none' : 'block'; }
+    function closeView() { document.getElementById('resultsView').style.display = 'none'; }
+</script>
+</body>
+</html>
