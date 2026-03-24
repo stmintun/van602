@@ -189,7 +189,7 @@ window.db = { parts: db_parts, bht: db_bht, gen5: db_gen5, tangent: db_tan, ken:
         </header>
 
         <div class="dashboard-container">
-            <h2 class="section-title"><span><i class="ph-fill ph-warning-circle"></i> Quick Access</span></h2>
+            <h2 class="section-title"><span><i class="ph-fill ph-warning-circle"></i> Locations</span></h2>
             <div class="dashboard">
                 <div class="menu-card card-danger" onclick="openMode('out')" style="grid-column: span 2;">
                     <div class="card-icon-wrap"><i class="ph-fill ph-siren"></i></div>
@@ -254,7 +254,7 @@ window.db = { parts: db_parts, bht: db_bht, gen5: db_gen5, tangent: db_tan, ken:
                 </div>
             </div>
             
-            <h2 class="section-title" style="margin-top:20px;"><span><i class="ph-fill ph-calculator"></i> Tooling</span></h2>
+            <h2 class="section-title" style="margin-top:20px;"><span><i class="ph-fill ph-calculator"></i> Engineering Tooling</span></h2>
             <div class="dashboard">
                 <div class="menu-card card-teal" onclick="openCalculator('temp')">
                     <div class="card-icon-wrap" style="color:var(--teal)"><i class="ph-fill ph-thermometer"></i></div>
@@ -665,7 +665,7 @@ window.db = { parts: db_parts, bht: db_bht, gen5: db_gen5, tangent: db_tan, ken:
         else if(type === 'f0a0') {
             document.getElementById('secTitle').innerText = "";
             const backBtn = document.querySelector('.back-btn');
-            backBtn.innerHTML = `<i class="ph-bold ph-arrow-left"></i> Tooling`;
+            backBtn.innerHTML = `<i class="ph-bold ph-arrow-left"></i> Engineering Tooling`;
             
             c.innerHTML = `
                 <div class="calc-tabs" style="display:flex; border-radius:var(--radius-md); background:#e2e8f0; padding:5px; margin-bottom:20px; margin-top:-10px;">
@@ -713,7 +713,7 @@ window.db = { parts: db_parts, bht: db_bht, gen5: db_gen5, tangent: db_tan, ken:
         else if(type === 'ohms') {
             document.getElementById('secTitle').innerText = "";
             const backBtn = document.querySelector('.back-btn');
-            backBtn.innerHTML = `<i class="ph-bold ph-arrow-left"></i> Tooling`;
+            backBtn.innerHTML = `<i class="ph-bold ph-arrow-left"></i> Engineering Tooling`;
             c.innerHTML = `
                 <div class="calc-tabs" style="display:flex; border-radius:var(--radius-md); background:#e2e8f0; padding:5px; margin-bottom:20px; margin-top:-10px;">
                     <button id="tabOhms1" class="btn calc-tab active" onclick="switchOhms('1P')" style="flex:1; border-radius:var(--radius-md); border:none; background:white; color:var(--dark); box-shadow:var(--shadow-sm); padding:12px; font-weight:900; font-size:0.9rem;">1 PHASE</button>
@@ -799,7 +799,7 @@ window.db = { parts: db_parts, bht: db_bht, gen5: db_gen5, tangent: db_tan, ken:
         else if (type === 'dose') {
             document.getElementById('secTitle').innerText = "";
             const backBtn = document.querySelector('.back-btn');
-            backBtn.innerHTML = `<i class="ph-bold ph-arrow-left"></i> Tooling`;
+            backBtn.innerHTML = `<i class="ph-bold ph-arrow-left"></i> Engineering Tooling`;
             c.innerHTML = `
                 <div class="calc-panel" style="padding:25px; border-radius:var(--radius-lg);">
                     <div style="font-size:0.8rem; font-weight:800; color:var(--text-muted); text-transform:uppercase; margin-bottom:15px; text-align:center;">Dose Amount Check</div>
@@ -845,7 +845,7 @@ window.db = { parts: db_parts, bht: db_bht, gen5: db_gen5, tangent: db_tan, ken:
         else if (type === 'ratio') {
             document.getElementById('secTitle').innerText = "";
             const backBtn = document.querySelector('.back-btn');
-            backBtn.innerHTML = `<i class="ph-bold ph-arrow-left"></i> Tooling`;
+            backBtn.innerHTML = `<i class="ph-bold ph-arrow-left"></i> Engineering Tooling`;
             c.innerHTML = `
                 <div class="calc-panel" style="padding:25px; border-radius:var(--radius-lg);">
                     <div style="font-size:0.8rem; font-weight:800; color:white; background:var(--coral); padding:8px 15px; border-radius:30px; display:inline-block; text-transform:uppercase; margin-bottom:20px; letter-spacing:1px; box-shadow:0 4px 10px rgba(244, 63, 94, 0.2);">Fluid Ratio Converter</div>
