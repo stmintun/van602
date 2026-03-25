@@ -214,22 +214,22 @@ window.db = { parts: db_parts, bht: db_bht, gen5: db_gen5, tangent: db_tan, ken:
             <div class="dashboard">
                 <div class="menu-card card-warning" onclick="openMode('bht')">
                     <div class="card-icon-wrap"><i class="ph-fill ph-warning"></i></div>
-                    <h3>BHT Codes</h3><p>Error diagnostics</p>
+                    <h3>BHT</h3><p>Error diagnostics</p>
                     <div class="count-badge" id="b-bht">0</div>
                 </div>
                 <div class="menu-card card-purple" onclick="openMode('gen5')">
                     <div class="card-icon-wrap"><i class="ph-fill ph-lightning"></i></div>
-                    <h3>Gen 5 Alarms</h3><p>Alarm database</p>
+                    <h3>Gen 5</h3><p>Alarm database</p>
                     <div class="count-badge" id="b-gen5">0</div>
                 </div>
                 <div class="menu-card card-cyan" onclick="openMode('tangent')">
                     <div class="card-icon-wrap"><i class="ph-fill ph-waves"></i></div>
-                    <h3>Tangent Faults</h3><p>Fault diagnostics</p>
+                    <h3>Tangent</h3><p>Fault diagnostics</p>
                     <div class="count-badge" id="b-tan">0</div>
                 </div>
                 <div class="menu-card card-coral" onclick="openMode('ken')">
                     <div class="card-icon-wrap"><i class="ph-fill ph-bell-ringing"></i></div>
-                    <h3>Ken Alarms</h3><p>Ken alarm database</p>
+                    <h3>Ken</h3><p>Ken alarm database</p>
                     <div class="count-badge" id="b-ken">0</div>
                 </div>
                 <div class="menu-card card-danger" onclick="openMode('bandeli')">
@@ -249,7 +249,7 @@ window.db = { parts: db_parts, bht: db_bht, gen5: db_gen5, tangent: db_tan, ken:
                 </div>
                 <div class="menu-card card-teal" onclick="openMode('pan_alarms')">
                     <div class="card-icon-wrap"><i class="ph-fill ph-siren"></i></div>
-                    <h3>Pan Alarms</h3><p>Pan alarm database</p>
+                    <h3>Pan</h3><p>Pan alarm database</p>
                     <div class="count-badge" id="b-pan-alarms">0</div>
                 </div>
             </div>
@@ -343,7 +343,7 @@ window.db = { parts: db_parts, bht: db_bht, gen5: db_gen5, tangent: db_tan, ken:
     let currentLocalList = [];
     let currentLocalMode = "";
 
-    const modeLabels = { out: 'Out of Stock', parts: 'All Parts', bht: 'BHT Codes', gen5: 'Gen 5 Alarms', tangent: 'Tangent Faults', ken: 'Ken Alarms', bandeli: 'Bandeli', platypus: 'Platypus', hippopotamus: 'Hippopotamus', duck: 'Duck Locations', pan_alarms: 'Pan Alarms' };
+    const modeLabels = { out: 'Out of Stock', parts: 'All Parts', bht: 'BHT', gen5: 'Gen 5', tangent: 'Tangent', ken: 'Ken', bandeli: 'Bandeli', platypus: 'Platypus', hippopotamus: 'Hippopotamus', duck: 'Duck Locations', pan_alarms: 'Pan' };
 
     function init() {
         if (!masterDrive['inductions']) masterDrive['inductions'] = [];
