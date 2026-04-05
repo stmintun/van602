@@ -1,36 +1,146 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Beautiful Wife</title>
     <style>
-        body { background: #fff0f3; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; text-align: center; }
-        .heart { font-size: 80px; cursor: pointer; transition: transform 0.3s; animation: beat 1.2s infinite; }
-        @keyframes beat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
-        h1 { color: #ff4d6d; margin-top: 20px; font-size: 24px; padding: 0 20px; }
-        #message { color: #590d22; font-size: 18px; margin-top: 15px; padding: 0 30px; min-height: 50px; }
-        .btn { margin-top: 30px; padding: 10px 20px; background: #ff4d6d; color: white; border: none; border-radius: 20px; font-weight: bold; }
+        :root {
+            --primary-pink: #ff4d6d;
+            --soft-bg: #fff0f3;
+            --text-dark: #590d22;
+        }
+
+        body {
+            background-color: var(--soft-bg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .container {
+            padding: 20px;
+            max-width: 400px;
+        }
+
+        .heart {
+            font-size: 100px;
+            cursor: pointer;
+            display: inline-block;
+            transition: transform 0.2s;
+            animation: beat 1.2s infinite;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        @keyframes beat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+
+        .heart:active {
+            transform: scale(0.9);
+        }
+
+        h1 {
+            color: var(--primary-pink);
+            font-size: 28px;
+            margin: 20px 0 10px 0;
+        }
+
+        #message-box {
+            background: white;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(255, 77, 109, 0.1);
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px;
+            border: 2px solid #ffccd5;
+        }
+
+        #message {
+            color: var(--text-dark);
+            font-size: 18px;
+            font-weight: 500;
+            line-height: 1.4;
+        }
+
+        .instruction {
+            font-size: 14px;
+            color: #a78b91;
+            margin-top: 10px;
+        }
+
+        .whatsapp-btn {
+            margin-top: 30px;
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #25D366;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
     </style>
 </head>
 <body>
 
-    <div class="heart" onclick="newLove()">❤️</div>
-    <h1>For My Beautiful Wife</h1>
-    <div id="message">Tap the heart for a surprise...</div>
+    <div class="container">
+        <div class="heart" onclick="newLove()">❤️</div>
+        <h1>Hey Beautiful</h1>
+        
+        <div id="message-box">
+            <div id="message">Tap the heart for a surprise...</div>
+        </div>
+        
+        <p class="instruction">Every tap is a new reason I love you.</p>
+
+        <a href="https://wa.me/YOUR_NUMBER?text=I%20just%20opened%20your%20app!%20I%20miss%20you%20too!%20❤️" class="whatsapp-btn">
+            Tap to Text Me 📱
+        </a>
+    </div>
 
     <script>
         const notes = [
-            "You are my favorite person in the world! ❤️",
-            "Coupon: One long hug on arrival home.",
-            "Thinking of you makes my day better.",
-            "Coupon: I'm picking up dessert tonight! 🍦",
-            "You look stunning today.",
-            "I'm so lucky to have you by my side."
+            "I love you more than the miles between us! ❤️",
+            "Coupon: Valid for one 3-hour 'fall asleep on FaceTime' session. 📱",
+            "Distance makes the heart grow fonder... and our phone bills higher. Worth it! 💸",
+            "Coupon: You get to pick the movie for our next virtual date night. 🍿",
+            "I miss your face. Like, a lot. Like, more than a kid misses summer break. 🏃‍♂️",
+            "Coupon: One 'Virtual Hug' (Close your eyes and imagine I'm squeezing you!)",
+            "I'm counting down the seconds until I don't have to say 'Can you hear me now?' 📶",
+            "You’re worth every single mile and every time the Wi-Fi cuts out. ❤️",
+            "Funny Fact: If I could teleport, I'd be at your door right now. Also, I'd be very rich. ⚡",
+            "Coupon: I'll send you a surprise snack delivery this week! 🍕",
+            "I love you even when you're hangry via video call. 🦖",
+            "You are the 'CSS' to my 'HTML'—you make everything look beautiful. 💻",
+            "I'd still choose you even if you didn't know where we should eat for dinner. 🍕",
+            "Coupon: I will kill any spider that enters your room while we are on video. 🕷️",
+            "You're the person I want to annoy for the rest of my life. ❤️"
         ];
 
         function newLove() {
             const msgDiv = document.getElementById('message');
-            const randomNote = notes[Math.floor(Math.random() * notes.length)];
-            msgDiv.innerText = randomNote;
+            
+            // Add a little pop animation when text changes
+            msgDiv.style.opacity = 0;
+            
+            setTimeout(() => {
+                const randomNote = notes[Math.floor(Math.random() * notes.length)];
+                msgDiv.innerText = randomNote;
+                msgDiv.style.opacity = 1;
+            }, 150);
         }
     </script>
 </body>
